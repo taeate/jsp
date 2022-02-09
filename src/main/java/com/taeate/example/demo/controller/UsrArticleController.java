@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UsrArticleController {
     // 인스턴스 변수 시작
+    private Article
     private int articlesLastId;
     private List<Article> articles;
     // 인스턴스 변수 끝
