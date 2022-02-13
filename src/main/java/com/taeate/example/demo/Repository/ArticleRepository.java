@@ -1,71 +1,29 @@
 package com.taeate.example.demo.Repository;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.taeate.example.demo.vo.Article;
 
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
-@Component
-public class ArticleRepository {
 
-    private int articlesLastId;
-    private List<Article> articles;
+@Mapper
+public interface ArticleRepository {
 
-    public ArticleRepository() {
-        articlesLastId = 0;
-        articles = new ArrayList<>();
-
-        makeTestData();
-    }
-
-    public void makeTestData() {
-        for (int i = 1; i <= 10; i++) {
-
-            String title = "제목" + 1;
-            String body = "내용" + 1;
-            writeArticle(title, body);
-        }
-    }
 
     // 서비스 메서드 시작
-    public Article writeArticle(String title, String body) {
+    public Article writeArticle(String title, String body);
 
-        int id = articlesLastId + 1;
-        Article article = new Article(id, title, body);
+    @Select("select * from article where id = #{id}")
+    public Article getArticle(@Param("id") int id);
 
-        articles.add(article);
-        articlesLastId = id;
+    public void deleteArticle(int id);
 
-        return article;
-    }
+    public void ModifyArticle(int id, String title, String body);
 
-    public Article getArticle(int id) {
-        for (Article article : articles) {
-            if (article.getId() == id) {
-                return article;
-            }
-        }
-        return null;
-    }
-
-    public void deleteArticle(int id) {
-        Article article = getArticle(id);
-
-        articles.remove(article);
-    }
-
-    public void ModifyArticle(int id, String title, String body) {
-        Article article = getArticle(id);
-
-        article.setTitle(title);
-        article.setBody(body);
-
-    }
-
-    public List<Article> getArticles() {
-        return articles;
-    }
+    public List<Article> getArticles();
 
 }

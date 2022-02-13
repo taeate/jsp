@@ -13,6 +13,10 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
+    public ArticleService(ArticleRepository articleRepository){
+        this.articleRepository = articleRepository;
+    }
+
     public Article writeArticle(String title, String body) {
         return articleRepository.writeArticle(title, body);
     }
