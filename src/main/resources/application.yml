@@ -1,11 +1,11 @@
 server:
-  port: 8080
+  port: 80
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.182.9:3306/jsp
-    username: taeate
-    password: tjdwls1451
+    url: jdbc:mysql://127.0.0.1:3306/jsp
+    username: root
+    password: 
 mybatis:
   type-aliases-package: com.taeate.example.demo.vo
 
