@@ -1,6 +1,7 @@
 package com.taeate.example.demo.controller;
 
 import com.taeate.example.demo.service.MemberService;
+import com.taeate.example.demo.vo.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,20 @@ public class UsrMemberController {
     @Autowired
     private MemberService memberService;
 
+    public UsrMemberController(MemberService memberService){
+        this.memberService = memberService;
+    }
+
     @RequestMapping("/usr/member/dojoin")
     @ResponseBody
-    public String dojoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
+    public Member dojoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
 
-        memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+        int id = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
-        return "성공";
+        Member member = memberService.getMemberById(id);
+
+        return member;
+        
     }
 
 
