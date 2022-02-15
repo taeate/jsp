@@ -54,7 +54,7 @@ public class UsrArticleController {
     @RequestMapping("/usr/article/doModify")
     @ResponseBody
     public ResultData doModify(int id, String title, String body) {
-        Article article = articleService.getArticle(id);
+		Article article = articleService.getArticle(id);
 
         if (article == null) {
             ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.", id));
