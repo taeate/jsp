@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UsrArticleController {
     @Autowired
@@ -20,17 +22,28 @@ public class UsrArticleController {
     // 액션메서드 시작
     @RequestMapping("/usr/article/doAdd")
     @ResponseBody
-    public ResultData doAdd(String title, String body) {
+    public ResultData doAdd(HttpSession httpSession,String title, String body) {
+        boolean isLogined = false;
+
+        int loginedMemberId = 0;
+
+        if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+            loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
+		}
+        if (isLogined == false){
+            return ResultData.from("F-3", "로그인후 이용해주세요.");
+        }
 
         if ( Ut.empty(title)){
             return ResultData.from("F-1", "title(을)를 입력해주세요");
         }
         
         if ( Ut.empty(body)){
-            return ResultData.from("F-1", "body(을)를 입력해주세요");
+            return ResultData.from("F-2", "body(을)를 입력해주세요");
         }
 
-       ResultData writeArticleRd = articleService.writeArticle(title, body);
+       ResultData writeArticleRd = articleService.writeArticle(loginedMemberId,title, body);
        int id = (int)writeArticleRd.getData1();
 
        Article article = articleService.getArticle(id);
