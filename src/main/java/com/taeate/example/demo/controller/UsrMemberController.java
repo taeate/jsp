@@ -1,5 +1,7 @@
 package com.taeate.example.demo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import com.taeate.example.demo.service.MemberService;
 import com.taeate.example.demo.util.Ut;
 import com.taeate.example.demo.vo.Member;
@@ -9,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsrMemberController {

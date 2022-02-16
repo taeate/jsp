@@ -35,7 +35,7 @@ public class ArticleService {
     }
 
     public ResultData ModifyArticle(int id, String title, String body) {
-        articleRepository.ModifyArticle(id, title, body);
+        articleRepository.modifyArticle(id, title, body);
 
         Article article = getArticle(id);
 

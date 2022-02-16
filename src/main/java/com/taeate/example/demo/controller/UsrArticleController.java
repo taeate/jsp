@@ -2,6 +2,8 @@ package com.taeate.example.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.taeate.example.demo.service.ArticleService;
 import com.taeate.example.demo.util.Ut;
 import com.taeate.example.demo.vo.Article;
@@ -13,13 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class UsrArticleController {
     @Autowired
     private ArticleService articleService;
-
     // 액션메서드 시작
     @RequestMapping("/usr/article/doAdd")
     @ResponseBody
@@ -83,7 +82,7 @@ public class UsrArticleController {
     }
 
     @RequestMapping("/usr/article/doModify")
-    @ResponseBody
+    @ResponseBody 
     public ResultData doModify(HttpSession httpSession, int id, String title, String body) {
         boolean isLogined = false;
         int loginedMemberId = 0;
@@ -115,11 +114,11 @@ public class UsrArticleController {
     // 액션메서드 끝
     @RequestMapping("/usr/article/list")
     public String showList(Model model) {
-        List<Article> articles = articleService.getArticles();
+		List<Article> articles = articleService.getArticles();
+		
+		model.addAttribute("articles", articles);
 
-        model.addAttribute("articles", articles);
-
-       return "usr/article/list";
+		return "usr/article/list";
     }
 
     @RequestMapping("/usr/article/getArticle")
