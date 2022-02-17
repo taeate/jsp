@@ -3,31 +3,34 @@
 
 <c:set var="pageTitle" value="게시물 리스트" />
 <%@ include file="../common/head.jspf" %>
-  <div>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>번호</th>
-          <th>작성날짜</th>
-          <th>수정날짜</th>
-          <th>작성자</th>
-          <th>제목</th>
-        </tr>
-      </thead>
-      <tbody>
-        <c:forEach var="article" items="${articles}">
-          <tr>
-            <td>${article.id}</td>
-            <td>${article.regDate.substring(2,16)}</td>
-            <td>${article.updateDate.substring(2,16)}</td>
-            <td>${article.memberId}</td>
-            <td>
-              <a href="../article/detail?id=${article.id}">${article.title}</a>
-            </td>
-          </tr>
-        </c:forEach>
-      </tbody>
-    </table>
-    
-  </div>
+   <section>
+      <div class="container mx-auto px-3 mt-5">
+        <div class="table-box-type-1">
+          <table border="1">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>작성날짜</th>
+                <th>수정날짜</th>
+                <th>작성자</th>
+                <th>제목</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="article" items="${articles}">
+                <tr>
+                  <td>${article.id}</td>
+                  <td>${article.regDate.substring(2,16)}</td>
+                  <td>${article.updateDate.substring(2,16)}</td>
+                  <td>${article.memberId}</td>
+                  <td>
+                    <a href="../article/detail?id=${article.id}">${article.title}</a>
+                  </td>
+                </tr>
+              </c:forEach>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </section>
   <%@ include file="../common/foot.jspf" %>
