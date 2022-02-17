@@ -7,11 +7,14 @@
 <title>리스트</title>
 </head>
 <body>
-  <h1>리스트페이지.</h1>
-  이런건
-  되는데
-  여기서 이제 태그 하나 넣으면 안되여 
-  <hr />
+  <h1>메인 페이지</h1>
+  <header>
+      <a href="/">로고</a>
+      <ul>
+          <li><a href="/">홈</a></li>
+          <li><a href="/usr/article/list">리스트</a></li>
+      </ul>
+  </header>
   <div>
     <table border="1">
       <thead>
