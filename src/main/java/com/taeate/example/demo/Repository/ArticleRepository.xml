@@ -17,11 +17,6 @@
         where id = #{id}
     </select>
 
-    <select id = "getArticles" resultType="Article">
-        select * from article 
-        order by id DESC
-    </select>
-
     <select id = "getLastInsertId" resultType = "int">
        select last_insert_id()
     </select>
