@@ -7,6 +7,13 @@
       <div class="container mx-auto px-3 mt-5">
         <div class="table-box-type-1">
           <table border="1">
+            <colgroup>
+              <col width="50">
+              <col width="150">
+              <col width="150">
+              <col>
+              <col>
+            </colgroup>
             <thead>
               <tr>
                 <th>번호</th>
