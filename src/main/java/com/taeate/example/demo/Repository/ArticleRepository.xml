@@ -11,11 +11,6 @@
         title = #{title},
         `body` = #{body}
     </insert>
-    
-    <select id ="getArticle" resultType="Article">
-        select * from article
-        where id = #{id}
-    </select>
 
     <select id = "getLastInsertId" resultType = "int">
        select last_insert_id()

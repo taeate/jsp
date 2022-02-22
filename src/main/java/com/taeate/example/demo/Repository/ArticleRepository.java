@@ -15,7 +15,16 @@ import org.apache.ibatis.annotations.Select;
 public interface ArticleRepository {
 	public void writeArticle(@Param("memberId") int memberId, @Param("title") String title, @Param("body") String body);
 
-	public Article getArticle(@Param("id") int id);
+	@Select("""
+		select A.*,
+		M.nickname AS extra__writerName
+		from article AS A
+		left join member AS M
+		on A.memberId = M.id
+		WHERE 1
+		AND A.id = #{id}
+	""")
+	public Article getForPrintArticle(@Param("id") int id);
 
 	public void deleteArticle(@Param("id") int id);
 
