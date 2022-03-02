@@ -11,66 +11,63 @@ import com.taeate.example.demo.util.Ut;
 import lombok.Getter;
 
 public class Rq {
-    @Getter
-    private boolean islogined;
-    @Getter
-    private int loginedMemberId;
+	@Getter
+	private boolean isLogined;
+	@Getter
+	private int loginedMemberId;
 
-    private HttpServletRequest req;
-    private HttpServletResponse resp;
-    private HttpSession session;
-    
-    public Rq(HttpServletRequest req, HttpServletResponse resp) {
-        this.req = req;
-        this.resp = resp;
+	private HttpServletRequest req;
+	private HttpServletResponse resp;
+	private HttpSession session;
 
-        this.session = req.getSession();
-        boolean isLogined = false;
+	public Rq(HttpServletRequest req, HttpServletResponse resp) {
+		this.req = req;
+		this.resp = resp;
 
-        int loginedMemberId = 0;
+		this.session = req.getSession();
+		boolean isLogined = false;
+		int loginedMemberId = 0;
 
-        if (session.getAttribute("loginedMemberId") != null) {
+		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
-            loginedMemberId = (int)session.getAttribute("loginedMemberId");
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		}
-        this.islogined = isLogined;
-        this.loginedMemberId = loginedMemberId;
-    }
 
-    public boolean isLogined() {
-        return false;
-    }
+		this.isLogined = isLogined;
+		this.loginedMemberId = loginedMemberId;
+	}
 
-    public void printHistoryBackJs(String msg) {
-        resp.setContentType("text/html; charset=UTF-8");
+	public void printHistoryBackJs(String msg) {
+		resp.setContentType("text/html; charset=UTF-8");
 
-        println("<script>");
+		println("<script>");
 
-        if ( !Ut.empty(msg) ){
-            println("alert('"+ msg +"');");
-        }
-        
-        println("history.back();");
+		if (!Ut.empty(msg)) {
+			println("alert('" + msg + "');");
+		}
 
-        println("</script>");
-    }
-    
-    public void print(String str) {
-        try {
-            resp.getWriter().append(str);
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-        }
-    }
-    public void println(String str) {
-        print(str + "\n");
-    }
-    public void login(Member member) {
-        session.setAttribute("loginedMemberId",member.getId());
-    }
+		println("history.back();");
 
-    public void logout() {
-        session.removeAttribute("loginedMemberId");
-    }
+		println("</script>");
+	}
+
+	public void print(String str) {
+		try {
+			resp.getWriter().append(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void println(String str) {
+		print(str + "\n");
+	}
+
+	public void login(Member member) {
+		session.setAttribute("loginedMemberId", member.getId());
+	}
+
+	public void logout() {
+		session.removeAttribute("loginedMemberId");
+	}
 }

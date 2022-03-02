@@ -60,25 +60,21 @@ public class UsrMemberController {
 
     @RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(HttpSession httpSession) {
-		boolean isLogined = false;
+	public String doLogout(HttpServletRequest req) {
+		Rq rq = (Rq) req.getAttribute("rq");
 
-		if (httpSession.getAttribute("loginedMemberId") == null) {
-			isLogined = true;
+		if (!rq.isLogined()) {
+			return Ut.jsHistoryBack("이미 로그아웃 상태입니다.");
 		}
 
-		if (isLogined) {
-			return ResultData.from("S-1", "이미 로그아웃 상태입니다.");
-		}
+		rq.logout();
 
-		httpSession.removeAttribute("loginedMemberId");
-
-		return ResultData.from("S-2", "로그아웃 되었습니다.");
+		return Ut.jsReplace("로그아웃 되었습니다.", "/");
 	}
 
 
     @RequestMapping("/usr/member/login")
-	public String showLogin() {
+	public String showLogin(HttpSession httpSession) {
 		return "usr/member/login";
     }
 
@@ -87,36 +83,34 @@ public class UsrMemberController {
     @RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
-		Rq rq = (Rq)req.getAttribute("rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("이미 로그인되었습니다.");
 		}
-        if (Ut.empty(loginPw)) {
-            return Ut.jsHistoryBack("loginPw(을)를 입력해주세요.");
-        }
 
-        if (Ut.empty(loginId)) {
-            return Ut.jsHistoryBack("loginId(을)를 입력해주세요.");
-        }
-        if (Ut.empty(loginPw)) {
-            return Ut.jsHistoryBack("loginPw(을)를 입력해주세요.");
-        }
+		if (Ut.empty(loginId)) {
+			return Ut.jsHistoryBack("loginId(을)를 입력해주세요.");
+		}
 
-        Member member = memberService.getMemberByLoginId(loginId);
+		if (Ut.empty(loginPw)) {
+			return Ut.jsHistoryBack("loginPw(을)를 입력해주세요.");
+		}
 
-        if (member == null) {
-            return Ut.jsHistoryBack("존재하지 않는 로그인아이디 입니다.");
-        }
-        if (member.getLoginPw().equals(loginPw) == false ){
-            return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
-        }
-        
-        rq.login(member);
+		Member member = memberService.getMemberByLoginId(loginId);
 
-        return Ut.jsReplace(Ut.f("%s님 환영합니다", member.getNickname()), "/");
-        
-    }
+		if (member == null) {
+			return Ut.jsHistoryBack("존재하지 않은 로그인아이디 입니다.");
+		}
+
+		if (member.getLoginPw().equals(loginPw) == false) {
+			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+
+		rq.login(member);
+
+		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+	}
 
 
 }
