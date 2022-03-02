@@ -1,6 +1,8 @@
 package com.taeate.example.demo.vo;
 
 import lombok.Getter;
+
+
 public class ResultData {
 	@Getter
 	private String resultCode;
@@ -11,9 +13,6 @@ public class ResultData {
 	@Getter
 	private Object data1;
 	
-	private ResultData() {
-
-	}
 
 	public static ResultData from(String resultCode, String msg) {
 		return from(resultCode, msg, null, null);
