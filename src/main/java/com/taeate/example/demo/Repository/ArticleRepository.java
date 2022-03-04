@@ -16,14 +16,14 @@ public interface ArticleRepository {
 	public void writeArticle(@Param("memberId") int memberId, @Param("title") String title, @Param("body") String body);
 
 	@Select("""
-		select A.*,
-		M.nickname AS extra__writerName
-		from article AS A
-		left join member AS M
-		on A.memberId = M.id
-		WHERE 1
-		AND A.id = #{id}
-	""")
+			SELECT A.*,
+			M.nickname AS extra__writerName
+			FROM article AS A
+			LEFT JOIN member AS M
+			ON A.memberId = M.id
+			WHERE 1
+			AND A.id = #{id}
+			""")
 	public Article getForPrintArticle(@Param("id") int id);
 
 	public void deleteArticle(@Param("id") int id);
@@ -31,14 +31,13 @@ public interface ArticleRepository {
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
 
 	@Select("""
-        select A.*,
-		M.nickname AS extra__writerName
-		from article AS A
-		left join member AS M
-		on A.memberId = M.id
-        order by A.id DESC
-
-	""")
+			SELECT A.*,
+			M.nickname AS extra__writerName
+			FROM article AS A
+			LEFT JOIN member AS M
+			ON A.memberId = M.id
+			ORDER BY A.id DESC
+			""")
 	public List<Article> getArticles();
 
 	public int getLastInsertId();
