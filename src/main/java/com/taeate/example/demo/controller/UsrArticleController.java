@@ -66,24 +66,25 @@ public class UsrArticleController {
 	}
     
     @RequestMapping("/usr/article/modify")
-    public String showModify(HttpServletRequest req, int id, Model model){
-        Rq rq = (Rq) req.getAttribute("rq"); 
+	public String showModify(HttpServletRequest req, Model model, int id) {
+		Rq rq = (Rq) req.getAttribute("rq");
 
-        Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
-        if (article == null) {
-            return rq.historyBackJsOnView(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
-        }
+		if (article == null) {
+			return rq.historyBackJsOnView(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+		}
 
-        ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(),article);
+		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
-        if ( actorCanModifyRd.isFail()){
-            return rq.historyBackJsOnView(actorCanModifyRd.getMsg());
-        }
-        model.addAttribute("article", article);
-        
-        return "usr/article/modify";
-    }
+		if (actorCanModifyRd.isFail()) {
+			return rq.historyBackJsOnView(actorCanModifyRd.getMsg());
+		}
+		
+		model.addAttribute("article", article);
+
+		return "usr/article/modify";
+	}
  
 
     @RequestMapping("/usr/article/doModify")
@@ -103,7 +104,7 @@ public class UsrArticleController {
 			return actorCanModifyRd;
 		}
 
-		return articleService.ModifyArticle(id, title, body);
+		return articleService.modifyArticle(id, title, body);
 	}
 
     // 액션메서드 끝

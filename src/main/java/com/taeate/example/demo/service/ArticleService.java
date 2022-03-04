@@ -51,7 +51,7 @@ public class ArticleService {
 
 		return articles;
 	}
-    public ResultData ModifyArticle(int id, String title, String body) {
+    public ResultData modifyArticle(int id, String title, String body) {
         articleRepository.modifyArticle(id, title, body);
 
         Article article = getForPrintArticle(0, id);
