@@ -37,3 +37,5 @@
 2022-03-09 20:45:02 [WARN ] com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Thread starvation or clock leap detected (housekeeper delta=1h45m2s52ms).
 2022-03-09 20:45:02 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Pool stats (total=10, active=0, idle=10, waiting=0)
 2022-03-09 20:45:02 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Fill pool skipped, pool is at sufficient level.
+2022-03-09 20:45:32 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2022-03-09 20:45:32 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Fill pool skipped, pool is at sufficient level.
