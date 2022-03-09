@@ -21,7 +21,7 @@
         where id = #{id}
     </delete>
 
-    <update id = "ModifyArticle">
+    <update id = "modifyArticle">
         update article
         <set>
             <if test="title != null and title != ''">
