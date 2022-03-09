@@ -14,34 +14,27 @@
                 <tr>
                   <th>로그인아이디</th>
                   <td>
-                   <input name="loginId" class="w-2/3" type="text" placeholder="로그인아이디">
+                   <input name="loginId" type="text" placeholder="로그인아이디" class="input input-bordered input-primary w-full max-w-xs">
                   </td>
                   <tr></tr>
 
                   <th>로그인비밀번호</th>
                   <td>
-                    <input name="loginPw" class="w-2/3" type="password" placeholder="로그인비밀번호">
+                    <input name="loginPw" type="password" placeholder="로그인비밀번호" class="input input-bordered input-primary w-full max-w-xs">
                   </td>
                   <tr></tr>
 
                   <th>로그인</th>
                   <td>
-                    <input type="submit" value="로그인">
-                    <button type="button" onclick="history.back();">뒤로가기</button>
+                 
+                    <button type="submit"  class="btn btn-outline btn-primary">로그인</button>
+                    <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
                   </td>
                   <tr></tr>
                 </tr>
             </tbody>
           </table>
         </form>
-        <div class="btns">
-          <button type="button" onclick="history.back();">뒤로가기</button>
-          <a class="btn-text-link" href="../article/modify?id=${article.id}">게시물 수정</a>
-
-          <c:if test="${article.extra__actorCanDelete}">
-        <a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="../article/doDelete?id=${article.id}">게시물 삭제</a>
-      </c:if>
-        </div>
     </div>
   </section>
   <%@ include file="../common/foot.jspf" %>
