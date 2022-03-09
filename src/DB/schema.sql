@@ -1,5 +1,6 @@
-create database jsp;
-use jsp;
+DROP DATABASE IF EXISTS jsptest;
+create database jsptest;
+use jsptest;
 
 create table article (
 	id int(10) unsigned not null primary key auto_increment,
@@ -80,7 +81,7 @@ cellphoneNo = '01072396666',
 email = 'jjh1234@naver.com'
 
 # 게시물 테이블에 회원정보 추가
-ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
 DESC article;
 
 # 기존 게시물의 작성자를 2번 으로 지정
