@@ -9,8 +9,13 @@ import javax.servlet.http.HttpSession;
 import com.taeate.example.demo.service.MemberService;
 import com.taeate.example.demo.util.Ut;
 
-import lombok.Getter;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
+import lombok.Getter;
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 	@Getter
 	private boolean isLogined;
@@ -41,6 +46,8 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+
+		this.req.setAttribute("rq", this);
 	}
 
 	public void printHistoryBackJs(String msg) {

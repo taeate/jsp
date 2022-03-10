@@ -2,8 +2,6 @@ package com.taeate.example.demo.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 
 import com.taeate.example.demo.service.ArticleService;
 import com.taeate.example.demo.service.BoardService;
@@ -22,16 +20,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
+	private Rq rq;
 	
-	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.rq = rq;
 	}
 
     @RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(HttpServletRequest req, int id) {
-		Rq rq = (Rq)req.getAttribute("rq");
+	public String doDelete(int id) {
+		
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
@@ -51,8 +51,8 @@ public class UsrArticleController {
 	}
     
     @RequestMapping("/usr/article/modify")
-    public String showModify(HttpServletRequest req, int id, Model model){
-        Rq rq = (Rq) req.getAttribute("rq"); 
+    public String showModify(int id, Model model){
+        
 
         Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
@@ -72,17 +72,17 @@ public class UsrArticleController {
 
     
     @RequestMapping("/usr/article/write")
-	public String showWrite(HttpServletRequest req, Model model) {
+	public String showWrite(Model model) {
 
-		Rq rq = (Rq) req.getAttribute("rq");
+		
 
         return "usr/article/write";
 	}
 
     @RequestMapping("/usr/article/doWrite")
     @ResponseBody
-    public String doWrite(HttpServletRequest req, String title, String body, String replaceUri) {
-        Rq rq = (Rq)req.getAttribute("rq");
+    public String doWrite( String title, String body, String replaceUri) {
+      
 
         if ( Ut.empty(title)){
             return rq.jsHistoryBack("title(을)를 입력해주세요");
@@ -106,8 +106,8 @@ public class UsrArticleController {
 
     @RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest req, int id, String title, String body) {
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doModify(int id, String title, String body) {
+		
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
@@ -128,29 +128,26 @@ public class UsrArticleController {
 
     // 액션메서드 끝
     @RequestMapping("/usr/article/list")
-	public String showList(HttpServletRequest req, Model model, int boardId) {
+	public String showList(Model model, int boardId) {
 		Board board = boardService.getBoardById(boardId);
-
-        Rq rq = (Rq) req.getAttribute("rq");
-
-
-        if ( board == null ) {
-            return rq.historyBackJsOnView(Ut.f("%d번 게시판은 존재하지않습니다.", boardId));
-        }
 		
-        int articlesCount = articleService.getArticlesCount(boardId);
+		if ( board == null ) {
+			return rq.historyBackJsOnView(Ut.f("%d번 게시판은 존재하지 않습니다.", boardId));
+		}
+
+		int articlesCount = articleService.getArticlesCount(boardId);
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId);
 
 		model.addAttribute("board", board);
-        model.addAttribute("articlesCount", articlesCount);
+		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("articles", articles);
 
 		return "usr/article/list";
 	}
     
     @RequestMapping("/usr/article/detail")
-    public String showDetail(HttpServletRequest req, Model model, int id) {
-		Rq rq = (Rq)req.getAttribute("rq");
+    public String showDetail(Model model, int id) {
+		
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
@@ -162,9 +159,9 @@ public class UsrArticleController {
 
     @RequestMapping("/usr/article/getArticle")
     @ResponseBody
-    public ResultData getArticle(int id, HttpServletRequest req) {
+    public ResultData getArticle(int id) {
 
-        Rq rq = (Rq)req.getAttribute("rq");
+      
 
         Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
