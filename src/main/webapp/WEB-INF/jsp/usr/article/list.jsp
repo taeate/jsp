@@ -5,6 +5,9 @@
 <%@ include file="../common/head.jspf" %>
    <section>
       <div class="container mx-auto px-3 mt-5">
+      <div>
+        게시물 개수 : <div class="badge">${articlesCount}</div> 개
+      </div>
         <div class="table-box-type-1">
           <table border="1">
             <colgroup>
