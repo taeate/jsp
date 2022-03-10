@@ -88,3 +88,44 @@ DESC article;
 UPDATE article
 SET memberId = 2
 WHERE memberId = 0;
+
+# 게시판 테이블생성
+create table board (
+	id int(10) unsigned not null primary key auto_increment,
+	regdate datetime not null,
+	updateDate datetime not null,
+	`code` char(50) not null unique comment 'notice(공지사항),free1(자유게시판1),free2(자유게시판),...',
+	`name` char(50) not null unique comment '게시판이름',
+	delstatus tinyint(1) unsigned not null default 0 comment '삭제여부 (0=탈퇴전,1=탈퇴)',
+	delDate datetime comment '삭제날짜'
+);
+
+# 기본 게시판 생성
+insert into Board
+set regDate = now(),
+updateDate = now(),
+`code`= 'notice',
+`name`= '공지사항'; 
+
+
+# 자유 게시판 생성
+insert into Board
+set regDate = now(),
+updateDate = now(),
+`code`= 'free1',
+`name`= '자유게시판'; 
+
+
+# 게시판 테이블에 BoardId 칼럼 추가
+alter table article add COLUMN boardId int(10) unsigned not null after memberId;
+select * from article;
+
+# 1,2번 게시물을 공지사항 게시물로 지정
+update article
+set BoardId = 1
+where id in (1,2);
+
+# 3번 게시물을 자유게시판 게시물로 지정
+update article
+set BoardId = 2
+where id in (3);
