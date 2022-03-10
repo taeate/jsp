@@ -21,6 +21,7 @@
         where id = #{id}
     </delete>
 
+<<<<<<< HEAD
     <update id="modifyArticle">
 		UPDATE article
 		<set>
@@ -34,4 +35,19 @@
 		</set>
 		WHERE id = #{id}
 	</update>
+=======
+    <update id = "modifyArticle">
+        update article
+        <set>
+            <if test="title != null and title != ''">
+            title = #{title},
+            </if>
+            <if test="body != null and body != ''">
+            `body` = #{body},
+            </if>
+        updateDate = now()
+        </set>
+        where id = #{id}
+    </update>
+>>>>>>> bdd7034ce4635c0f5b02982901a9463d5bc90522
 </mapper>
