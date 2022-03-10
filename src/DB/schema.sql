@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS jsptest;
-create database jsptest;
-use jsptest;
+DROP DATABASE IF EXISTS jsp;
+create database jsp;
+use jsp;
 
 create table article (
 	id int(10) unsigned not null primary key auto_increment,
