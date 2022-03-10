@@ -27,6 +27,7 @@ public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
+    public Object initOnBeforeActionInterceptor;
 
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
@@ -88,4 +89,8 @@ public class Rq {
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
 	}
+
+    public void initOnBeforeActionInterceptor() {
+		
+    }
 }
