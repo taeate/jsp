@@ -22,7 +22,7 @@
             <th>게시판</th>
             <td>
               <select required="required" class="select select-bordered" name="boardId">
-                <option selected disabled>게시판을 선택해주세요.</option>
+                <option required="required" selected disabled>게시판을 선택해주세요.</option>
                 <option value="1">공지</option>
                 <option value="2">자유</option>
               </select>
