@@ -41,11 +41,11 @@
             </tbody>
           </table>
         </div>
-        <div class="page-menu mt-3">
+        <div class="page-menu mt-5">
           <div class="btn-group justify-center">
-            <c:forEach begin="1" end="10" var="i">
+            <c:forEach begin="1" end="${pagesCount}" var="i">
 
-              <a class="btn ${param.page == i ? 'btn-active' : ''}" href="?page=${i}">${i}</a>
+              <a class="btn ${page == i ? 'btn-active' : ''}" href="?page=${i}">${i}</a>
         
             </c:forEach>
           </div>
