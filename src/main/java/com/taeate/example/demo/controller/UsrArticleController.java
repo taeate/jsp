@@ -84,7 +84,16 @@ public class UsrArticleController {
         
         return "usr/article/modify";
     }
- 
+    
+    @RequestMapping("/usr/article/write")
+	public String showWrite(HttpServletRequest req, Model model) {
+		Rq rq = (Rq) req.getAttribute("rq");
+
+
+        return "usr/article/write";
+	}
+
+
 
     @RequestMapping("/usr/article/doModify")
 	@ResponseBody
