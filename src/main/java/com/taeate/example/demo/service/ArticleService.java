@@ -45,8 +45,8 @@ public class ArticleService {
 		article.setExtra__actorCanModify(actorCanModifyRd.isSuccess());
 	}
 
-    public List<Article> getForPrintArticles(int actorId) {
-		List<Article> articles = articleRepository.getArticles();
+    public List<Article> getForPrintArticles(int actorId, int boardId) {
+		List<Article> articles = articleRepository.getArticles(boardId);
 
 		for ( Article article : articles ) {
 			updateForPrintData(actorId, article);
