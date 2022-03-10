@@ -130,8 +130,14 @@ public class UsrArticleController {
     @RequestMapping("/usr/article/list")
 	public String showList(HttpServletRequest req, Model model, int boardId) {
 		Board board = boardService.getBoardById(boardId);
+
+        Rq rq = (Rq) req.getAttribute("rq");
+
+
+        if ( board == null ) {
+            return rq.historyBackJsOnView(Ut.f("%d번 게시판은 존재하지않습니다.", boardId));
+        }
 		
-		Rq rq = (Rq) req.getAttribute("rq");
 
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
 
