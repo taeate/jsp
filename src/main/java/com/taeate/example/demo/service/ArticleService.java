@@ -7,20 +7,18 @@ import com.taeate.example.demo.util.Ut;
 import com.taeate.example.demo.vo.Article;
 import com.taeate.example.demo.vo.ResultData;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleService {
-    @Autowired
     private ArticleRepository articleRepository;
 
     public ArticleService(ArticleRepository articleRepository){
         this.articleRepository = articleRepository;
     }
 
-    public ResultData writeArticle(int MemberId, String title, String body) {
-        articleRepository.writeArticle(MemberId,title, body);
+    public ResultData writeArticle(int MemberId, int boardId, String title, String body) {
+        articleRepository.writeArticle(MemberId, boardId, title, body);
         int id = articleRepository.getLastInsertId();
 
         return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);

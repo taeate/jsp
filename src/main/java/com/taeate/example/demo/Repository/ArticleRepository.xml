@@ -3,14 +3,15 @@
 
 <mapper
      namespace="com.taeate.example.demo.Repository.ArticleRepository">
-    <insert id ="writeArticle">
-        insert into article
-        set regDate = now(),
-        updateDate = now(),
-        memberId = #{memberId},
-        title = #{title},
-        `body` = #{body}
-    </insert>
+    <insert id="writeArticle">
+		INSERT INTO article
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		boardId = #{boardId},
+		memberId = #{memberId},
+		title = #{title},
+		`body` = #{body}
+	</insert>
 
     <select id = "getLastInsertId" resultType = "int">
        select last_insert_id()

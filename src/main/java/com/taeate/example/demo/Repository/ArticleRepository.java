@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface ArticleRepository {
-	public void writeArticle(@Param("memberId") int memberId, @Param("title") String title, @Param("body") String body);
+	public void writeArticle(@Param("memberId") int memberId, @Param("boardId") int boardId, @Param("title") String title, @Param("body") String body);
 
 	@Select("""
 			SELECT A.*,
