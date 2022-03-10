@@ -6,12 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 
 
 import com.taeate.example.demo.service.ArticleService;
+import com.taeate.example.demo.service.BoardService;
 import com.taeate.example.demo.util.Ut;
 import com.taeate.example.demo.vo.Article;
+import com.taeate.example.demo.vo.Board;
 import com.taeate.example.demo.vo.ResultData;
 import com.taeate.example.demo.vo.Rq;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UsrArticleController {
-    @Autowired
-    private ArticleService articleService;
+	private ArticleService articleService;
+	private BoardService boardService;
+	
+	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+		this.articleService = articleService;
+		this.boardService = boardService;
+	}
 
     @RequestMapping("/usr/article/doDelete")
 	@ResponseBody
@@ -122,11 +128,14 @@ public class UsrArticleController {
 
     // 액션메서드 끝
     @RequestMapping("/usr/article/list")
-    public String showList(HttpServletRequest req, Model model) {
-		Rq rq = (Rq)req.getAttribute("rq");
+	public String showList(HttpServletRequest req, Model model, int boardId) {
+		Board board = boardService.getBoardById(boardId);
+		
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
 
+		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
 
 		return "usr/article/list";

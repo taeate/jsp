@@ -33,8 +33,13 @@
             </a>
             </li>
             <li>
-                <a href="/usr/article/list" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>게시글</span>
+                <a href="/usr/article/list?boardId=1" class="flex items-center h-full px-3 hover:underline hover:text-lg">
+                <span>공지사항</span>
+            </a>
+            </li>
+            <li>
+                <a href="/usr/article/list?boardId=2" class="flex items-center h-full px-3 hover:underline hover:text-lg">
+                <span>자유게시판</span>
             </a>
             </li>
             <c:if test="${!rq.isLogined()}">

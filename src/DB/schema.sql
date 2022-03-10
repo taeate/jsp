@@ -113,7 +113,7 @@ insert into Board
 set regDate = now(),
 updateDate = now(),
 `code`= 'free1',
-`name`= '자유게시판'; 
+`name`= '자유'; 
 
 
 # 게시판 테이블에 BoardId 칼럼 추가
