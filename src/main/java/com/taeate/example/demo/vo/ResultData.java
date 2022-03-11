@@ -1,8 +1,9 @@
 package com.taeate.example.demo.vo;
 
 import lombok.Getter;
+import lombok.ToString;
 
-
+@ToString
 public class ResultData {
 	@Getter
 	private String resultCode;

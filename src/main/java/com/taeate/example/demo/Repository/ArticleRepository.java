@@ -8,6 +8,7 @@ import com.taeate.example.demo.vo.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 
 
@@ -97,4 +98,14 @@ public interface ArticleRepository {
 		</script>
 		""")
     public int getArticlesCount(int boardId, String searchKeyword, String searchKeywordTypeCode);
+
+
+	@Update("""
+		<script>
+		UPDATE article
+		SET hitCount = hitCount + 1
+		WHERE id = #{id}
+		</script>
+		""")
+    public int increaseHitCount(int id);
 }
