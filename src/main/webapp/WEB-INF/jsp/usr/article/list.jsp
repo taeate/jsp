@@ -8,10 +8,11 @@
       <div>
         게시물 개수 : <div class="badge">${articlesCount}</div> 개
       </div>
-        <div class="table-box-type-1">
-          <table border="1">
+        <div class="overflow-x-auto mt-5">
+          <table class="table table-zebra w-full block truncate" >
             <colgroup>
               <col width="50">
+              <col width="150">
               <col width="150">
               <col width="150">
               <col>
@@ -34,7 +35,8 @@
                   <td>${article.updateDate.substring(2,16)}</td>
                   <td>${article.extra__writerName}</td>
                   <td>
-                    <a class="btn-text-link" href="../article/detail?id=${article.id}">${article.title}</a>
+                    <a class="btn-text-link w-full block truncate" href="../article/detail?id=${article.id}">
+                      ${article.title}
                   </td>
                 </tr>
               </c:forEach>
