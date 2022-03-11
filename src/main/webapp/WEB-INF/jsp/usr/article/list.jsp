@@ -5,8 +5,22 @@
 <%@ include file="../common/head.jspf" %>
    <section>
       <div class="container mx-auto px-3 mt-5">
-      <div>
-        게시물 개수 : <div class="badge">${articlesCount}</div> 개
+      <div class="flex">
+        <div>
+          게시물 개수 : <div class="badge">${articlesCount}</div> 개
+        </div>
+        <div class="flex-grow"></div>
+        <form class="flex">
+          <input type="hidden" name="boardId" value="${param.boardId}">
+          <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" class="select select-bordered">
+            <option disabled="disabled">검색타입</option>
+            <option value="title">제목</option>
+            <option value="body">내용</option>
+            <option value="title,body">제목+내용</option>
+          </select>
+          <input type="text" name="searchKeyword" class="input input-bordered ml-2 w-64" placeholder="검색어를 입력해주세요." maxlength="20" value="${param.searchKeyword}">
+          <button class="submit btn btn-accent ml-2">검색</button>
+        </form>
       </div>
         <div class="overflow-x-auto mt-5">
           <table class="table table-zebra w-full block truncate" >
