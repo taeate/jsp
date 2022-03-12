@@ -132,9 +132,8 @@ where id in (3);
 select * from article;
 select * from board;
 
-# 테스트 게시물 데이터
--- insert into article
--- (
+-- # 테스트 게시물 데이터
+-- insert into article (
 --     regDate, updateDate, memberId, boardId, title, `body`
 -- )
 -- select now(), now(), floor(rand() * 2) + 1, FLOOR(RAND() * 2) + 1, concat('제목_', rand()), CONCAT('내용_', RAND())
@@ -145,3 +144,59 @@ select * from board;
 alter table article add column hitCount int(10) unsigned not null default 0;
 
 
+# 리액션포인트 테이블
+create table reactionPoint (
+	id int(10) unsigned not null primary key AUTO_INCREMENT,
+	regdate datetime not null,
+	updateDate datetime not null,
+	memberId int(10) unsigned not null,
+	relTypeCode char(30) not null comment '관련데이터타입코드',
+	relId int(10) unsigned not null comment '관련데이터번호',
+	`point` smallint(2) not null
+);
+
+# 리액션포인트 테스트 데이터
+## 1번 회원이 1번 article에 대해 싫어요
+insert into reactionPoint
+set regdate = now(),
+	updateDate = now(),
+	memberId = 1,
+	relTypeCode = 'article',
+	relId = 1,
+	`point` = -1;
+	
+## 1번 회원이 2번 article에 대해 좋아요
+insert into reactionPoint
+set regdate = now(),
+	updateDate = now(),
+	memberId = 1,
+	relTypeCode = 'article',
+	relId = 2,
+	`point` = 1;
+	
+## 2번 회원이 1번 article에 대해 싫어요
+insert into reactionPoint
+set regdate = now(),
+	updateDate = now(),
+	memberId = 2,
+	relTypeCode = 'article',
+	relId = 1,
+	`point` = -1;
+	
+## 2번 회원이 2번 article에 대해 좋아요
+insert into reactionPoint
+set regdate = now(),
+	updateDate = now(),
+	memberId = 2,
+	relTypeCode = 'article',
+	relId = 2,
+	`point` = 1;
+	
+## 3번 회원이 1번 article에 대해 좋아요
+insert into reactionPoint
+set regdate = now(),
+	updateDate = now(),
+	memberId = 3,
+	relTypeCode = 'article',
+	relId = 1,
+	`point` = 1;
