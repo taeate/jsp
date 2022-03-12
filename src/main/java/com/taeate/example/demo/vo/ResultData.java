@@ -13,6 +13,10 @@ public class ResultData {
 	private String data1Name;
 	@Getter
 	private Object data1;
+	@Getter
+	private String data2Name;
+	@Getter
+	private Object data2;
 	
 
 	public static ResultData from(String resultCode, String msg) {
@@ -40,4 +44,10 @@ public class ResultData {
     public static ResultData newData(ResultData oldRd, String data1Name, Object Data) {
         return from(oldRd.getResultCode(),oldRd.getMsg(), data1Name, Data);
     }
+
+    public void setData2(String dataName, Object data) {
+		data2Name = dataName;
+		data2 = data;
+    }
+
 }
