@@ -70,11 +70,17 @@
                   </td>
                   <tr></tr>
 
-                  <th>추천수</th>
+                  <th>추천</th>
                   <td>
                     <span class="badge article-detail__hit-count">
                       ${article.extra__goodReactionPoint}
                     </span>
+
+                    <c:if test="${actorCanMakeReactionPoint}">
+                    <button class="btn btn-info btn-sm">좋아요 👍</button>
+                    <button class="btn btn-error btn-sm">싫어요 👎</button>
+                    </c:if>
+                    
                   </td>
                   <tr></tr>
                   
