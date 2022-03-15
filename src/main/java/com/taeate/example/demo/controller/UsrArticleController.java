@@ -84,27 +84,26 @@ public class UsrArticleController {
 	}
 
     @RequestMapping("/usr/article/doWrite")
-    @ResponseBody
-    public String doWrite(int boardId, String title, String body, String replaceUri) {
-      
+	@ResponseBody
+	public String doWrite(int boardId, String title, String body, String replaceUri) {
+		if (Ut.empty(title)) {
+			return rq.jsHistoryBack("title(을)를 입력해주세요.");
+		}
 
-        if ( Ut.empty(title)){
-            return rq.jsHistoryBack("title(을)를 입력해주세요");
-        }
-        
-        if ( Ut.empty(body)){
-            return rq.jsHistoryBack("body(을)를 입력해주세요");
-        }
+		if (Ut.empty(body)) {
+			return rq.jsHistoryBack("body(을)를 입력해주세요.");
+		}
 
-       ResultData writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), boardId, title, body);
-       int id = (int)writeArticleRd.getData1();
+		ResultData writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), boardId, title, body);
+		int id = (int) writeArticleRd.getData1();
 
-       if ( Ut.empty(replaceUri)){
-        replaceUri = Ut.f("../article/detail?id=%d", id);
-    }
+		if (Ut.empty(replaceUri)) {
+			replaceUri = Ut.f("../article/detail?id=%d", id);
+		}
 
-       return rq.jsReplace(Ut.f("%d번 게시물이 생성되었습니다", id), replaceUri);
-    }
+		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다.", id), replaceUri);
+	}
+
 
 
 
@@ -156,16 +155,25 @@ public class UsrArticleController {
 	}
     
     @RequestMapping("/usr/article/detail")
-    public String showDetail(Model model, int id) {
-		
-
+	public String showDetail(Model model, int id) {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
-
-        boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), null, id);
-
-        model.addAttribute("actorCanMakeReactionPoint", actorCanMakeReactionPoint);
+		
+		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article", id);
+		
+		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionPointRd.isSuccess());
+		
+		if ( actorCanMakeReactionPointRd.getResultCode().equals("F-2") ) {
+			int sumReactionPointByMemberId = (int)actorCanMakeReactionPointRd.getData1();
+			
+			if ( sumReactionPointByMemberId > 0 ) {
+				model.addAttribute("actorCanCancelGoodReaction", true);
+			}
+			else {
+				model.addAttribute("actorCanCancelBadReaction", true);
+			}
+		}
 
 		return "usr/article/detail";
 	}

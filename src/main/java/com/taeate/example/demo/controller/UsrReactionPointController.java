@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @Controller
 public class UsrReactionPointController {
 	private ReactionPointService reactionPointService;
@@ -22,7 +21,7 @@ public class UsrReactionPointController {
 	@ResponseBody
 	String doGoodReaction(String relTypeCode, int relId, String replaceUri) {
 		boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
-				relTypeCode, relId);
+				relTypeCode, relId).isSuccess();
 
 		if (actorCanMakeReactionPoint == false) {
 			return rq.jsHistoryBack("이미 처리되었습니다.");
@@ -37,7 +36,7 @@ public class UsrReactionPointController {
 	@ResponseBody
 	String doBadReaction(String relTypeCode, int relId, String replaceUri) {
 		boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
-				relTypeCode, relId);
+				relTypeCode, relId).isSuccess();
 
 		if (actorCanMakeReactionPoint == false) {
 			return rq.jsHistoryBack("이미 처리되었습니다.");
@@ -47,5 +46,4 @@ public class UsrReactionPointController {
 		
 		return rq.jsReplace("싫어요를 하셨습니다.", replaceUri);
 	}
-
 }

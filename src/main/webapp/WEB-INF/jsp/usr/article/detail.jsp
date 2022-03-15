@@ -73,13 +73,24 @@
                   <th>추천</th>
                   <td>
                     <span class="badge article-detail__hit-count">
-                      ${article.extra__goodReactionPoint}
+                      ${article.goodReactionPoint}
                     </span>
-
-                    <c:if test="${actorCanMakeReactionPoint}">
-                    <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-info btn-sm">좋아요 👍</a>
-                    <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-error btn-sm">싫어요 👎</a>
+                    
+                    <c:if test="${actorCanMakeReaction}">
+                      <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-info btn-sm">좋아요 👍</a>
+                      <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-error btn-sm">싫어요 👎</a>
                     </c:if>
+                    <c:if test="${actorCanCancelGoodReaction}">
+                      <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-info btn-sm">좋아요 👍</a>
+                      <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#" class="btn btn-error btn-sm">싫어요 👎</a>
+                    </c:if>
+                    <c:if test="${actorCanCancelBadReaction}">
+                      <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#" class="btn btn-info btn-sm">좋아요 👍</a>
+                      <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-error btn-sm">싫어요 👎</a>
+                    </c:if>
+                   
+                    
+
                     
                   </td>
                   <tr></tr>
