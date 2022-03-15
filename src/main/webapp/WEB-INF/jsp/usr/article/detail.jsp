@@ -69,6 +69,14 @@
                     </span>
                   </td>
                   <tr></tr>
+
+                  <th>추천수</th>
+                  <td>
+                    <span class="badge article-detail__hit-count">
+                      ${article.extra__goodReactionPoint}
+                    </span>
+                  </td>
+                  <tr></tr>
                   
                   <th>제목</th>
                   <td>
