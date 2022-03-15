@@ -20,7 +20,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
     // 이 함수는 인터셉터를 적용하는 역할
     public void addInterceptors(InterceptorRegistry registry){
          registry.addInterceptor(beforeActionInterceptor)
-                 .addPathPatterns("/**").excludePathPatterns("/resource/**")
+                 .addPathPatterns("/**")
+                 .excludePathPatterns("/favicon.ico")
+                 .excludePathPatterns("/resource/**")
                  .excludePathPatterns("/error");
 
 
@@ -29,6 +31,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
                  .addPathPatterns("/usr/article/dowrite")
                  .addPathPatterns("/usr/article/modify")
                  .addPathPatterns("/usr/article/doModify")
-                 .addPathPatterns("/usr/article/doDelete");
+                 .addPathPatterns("/usr/article/doDelete")
+                 .addPathPatterns("/usr/reactionPoint/doGoodReaction")
+                 .addPathPatterns("/usr/reactionPoint/doBadReaction");
     }
 }
