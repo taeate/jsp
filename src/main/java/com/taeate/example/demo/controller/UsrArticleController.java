@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.taeate.example.demo.service.ArticleService;
 import com.taeate.example.demo.service.BoardService;
+import com.taeate.example.demo.service.ReactionPointService;
 import com.taeate.example.demo.util.Ut;
 import com.taeate.example.demo.vo.Article;
 import com.taeate.example.demo.vo.Board;
@@ -21,11 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
+    private ReactionPointService reactionPointService;
 	private Rq rq;
 	
-	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, ReactionPointService reactionPointService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+        this.reactionPointService = reactionPointService;
 		this.rq = rq;
 	}
 
@@ -160,7 +163,7 @@ public class UsrArticleController {
 
 		model.addAttribute("article", article);
 
-        boolean actorCanMakeReactionPoint = articleService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), id);
+        boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), null, id);
 
         model.addAttribute("actorCanMakeReactionPoint", actorCanMakeReactionPoint);
 
