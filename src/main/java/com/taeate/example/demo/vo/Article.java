@@ -19,6 +19,9 @@ public class Article {
     private String extra__writerName;
     private boolean extra__actorCanDelete;
     private boolean extra__actorCanModify;
+    private int extra__sumReactionPoint;
+    private int extra__goodReactionPoint;
+    private int extra__badReactionPoint;
 
     public String getRegDateForPrint() {
         return regDate.substring(2,16);

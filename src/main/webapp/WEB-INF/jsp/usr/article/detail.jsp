@@ -11,12 +11,14 @@
 
 <script>
 	function ArticleDetail__increaseHitCount() {
-      const localStorageKey = `article__+ params.id +__viewDone`;
-      if ( localStorage.getItem(localStorageKey) ) {
-          return;
-      }
-      localStorage.setItem(localStorageKey, true);
-
+		const localStorageKey = 'article__' + params.id + '__viewDone';
+		
+		if ( localStorage.getItem(localStorageKey) ) {
+			return;
+		}
+		
+		localStorage.setItem(localStorageKey, true);
+		
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode: 'Y'
@@ -30,7 +32,7 @@
 		// ArticleDetail__increaseHitCount();
 		
 		// 임시코드
-		setTimeout(ArticleDetail__increaseHitCount, 300);
+		setTimeout(ArticleDetail__increaseHitCount, 500);
 	})
 </script>
    <section>
