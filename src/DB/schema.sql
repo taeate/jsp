@@ -235,4 +235,37 @@ ON A.id = RP_SUM.relId
 SET A.goodReactionPoint = RP_SUM.goodReactionPoint,
 A.badReactionPoint = RP_SUM.badReactionPoint;
 
+# 댓글 테이블 추가
+create table reply (
+	id int(10) unsigned not null primary key AUTO_INCREMENT,
+	regdate datetime not null,
+	updateDate datetime not null,
+	memberId int(10) unsigned not null,
+	relTypeCode char(30) not null comment '관련데이터타입코드',
+	relId int(10) unsigned not null comment '관련데이터번호',
+	`body` text not null
+);
 	
+INSERT INTO  reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 1';
+	
+INSERT INTO  reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 2';
+	
+INSERT INTO  reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 3';
