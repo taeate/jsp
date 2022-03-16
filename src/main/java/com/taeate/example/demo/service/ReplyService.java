@@ -1,7 +1,11 @@
 package com.taeate.example.demo.service;
 
+import java.util.List;
+
 import com.taeate.example.demo.Repository.ReplyRepository;
 import com.taeate.example.demo.util.Ut;
+import com.taeate.example.demo.vo.Member;
+import com.taeate.example.demo.vo.Reply;
 import com.taeate.example.demo.vo.ResultData;
 
 import org.springframework.stereotype.Service;
@@ -20,4 +24,8 @@ public class ReplyService {
 
 		return ResultData.from("S-1", Ut.f("%d번 댓글이 생성되었습니다.", id), "id", id);
 	}
+
+    public List<Reply> getForPrintReplies(Member actor, String relTypeCode, int relId) {
+       return replyRepository.getForPrintReplies(relTypeCode,relId);
+    }
 }

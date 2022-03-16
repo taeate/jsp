@@ -6,9 +6,11 @@ import java.util.List;
 import com.taeate.example.demo.service.ArticleService;
 import com.taeate.example.demo.service.BoardService;
 import com.taeate.example.demo.service.ReactionPointService;
+import com.taeate.example.demo.service.ReplyService;
 import com.taeate.example.demo.util.Ut;
 import com.taeate.example.demo.vo.Article;
 import com.taeate.example.demo.vo.Board;
+import com.taeate.example.demo.vo.Reply;
 import com.taeate.example.demo.vo.ResultData;
 import com.taeate.example.demo.vo.Rq;
 
@@ -23,11 +25,13 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
     private ReactionPointService reactionPointService;
+	private ReplyService replyService;
 	private Rq rq;
 	
-	public UsrArticleController(ArticleService articleService, BoardService boardService, ReactionPointService reactionPointService, Rq rq) {
+	public UsrArticleController(ArticleService articleService, ReplyService replyService ,BoardService boardService, ReactionPointService reactionPointService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.replyService = replyService;
         this.reactionPointService = reactionPointService;
 		this.rq = rq;
 	}
@@ -159,6 +163,11 @@ public class UsrArticleController {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
+
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMember(), "article", id);
+		int repliesCount = replies.size();
+
+		model.addAttribute("repliesCount", repliesCount);
 		
 		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article", id);
 		
