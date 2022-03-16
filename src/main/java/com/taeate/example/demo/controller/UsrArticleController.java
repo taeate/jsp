@@ -187,10 +187,10 @@ public class UsrArticleController {
 			return increaseHitCountRd;
 		}
 
-        ResultData rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
-
-        rd.setData2("id", id);
-
+		ResultData rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
+		
+		rd.setData2("id", id);
+		
 		return rd;
 	}
 
