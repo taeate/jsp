@@ -204,7 +204,41 @@
   </section>
   <section class="mt-5">
     <div class="container mx-auto px-3">
-      <h1>댓글 리스트(${repliesCount})</h1>
+      <h1>댓글 리스트(${replies.size()})</h1>
+      <table class="table table-zebra w-full block truncate" >
+        <colgroup>
+          <col width="50">
+          <col width="100">
+          <col width="100">
+          <col width="50">
+          <col>
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>작성날짜</th>
+            <th>수정날짜</th>
+            <th>추천수</th>
+            <th>작성자</th>
+            <th>내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach var="reply" items="${replies}">
+            <tr>
+              <th>${reply.id}</th>
+              <td>${reply.forPrintType1RegDate}</td>
+              <td>${reply.forPrintType1UpdateDate}</td>
+              <td>${reply.goodReactionPoint}</td>
+              <td>${reply.extra__writerName}</td>
+              <td>
+                ${reply.body}
+              </td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
     </div>
   </section>
   <%@ include file="../common/foot.jspf" %>
