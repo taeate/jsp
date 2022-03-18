@@ -221,6 +221,7 @@
             <th>수정날짜</th>
             <th>추천수</th>
             <th>작성자</th>
+            <th>비고</th>
             <th>내용</th>
           </tr>
         </thead>
@@ -233,7 +234,11 @@
               <td>${reply.goodReactionPoint}</td>
               <td>${reply.extra__writerName}</td>
               <td>
-                ${reply.body}
+                <a href="../reply/modify?id=${reply.id}">수정</a>
+                <a onclick="if ( confirm('정말 삭제하시겠습니까?') == false)" href="../reply/doDelete?id=${reply.id}">삭제</a>
+              </td>
+              <td>
+                ${reply.body}       
               </td>
             </tr>
           </c:forEach>
