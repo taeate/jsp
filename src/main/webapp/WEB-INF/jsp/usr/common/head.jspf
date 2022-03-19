@@ -51,7 +51,7 @@
             </c:if>
             <c:if test="${rq.isLogined()}">
             <li>
-                <a href="/usr/member/modify" class="flex items-center h-full px-3 hover:underline hover:text-lg">
+                <a href="/usr/member/myPage" class="flex items-center h-full px-3 hover:underline hover:text-lg">
                 <span>${rq.loginedMember.nickname} Profile</span>
             </a>
             </li>
