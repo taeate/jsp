@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface ReplyRepository {
@@ -61,4 +62,12 @@ public interface ReplyRepository {
 			WHERE id = #{id}
 			""")
 	void deleteReply(int id);
+
+	@Update("""
+			Update reply
+			SET updateDate = NOW(),
+			`body` = #{body}
+			WHERE id = #{id}
+			""")
+    void  modifyReply(int id, String body);
 }
