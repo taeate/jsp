@@ -6,6 +6,7 @@
    <section>
       <div class="container mx-auto px-3 mt-5">
         <form class="table-box-type-1" method="post" action="../member/doLogin">
+          <input type="hidden" name="afterLoginUri" value="${param.afterLoginUrl}" >
           <table border="1">
             <colgroup>
               <col width="200">
