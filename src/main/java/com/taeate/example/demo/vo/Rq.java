@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
+
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
@@ -27,13 +28,13 @@ public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
-    public Object initOnBeforeActionInterceptor;
 
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
 
 		this.session = req.getSession();
+
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 		Member loginedMember = null;
@@ -47,20 +48,16 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
-
-	
 	}
-	public void printReplaceJs(String msg , String url) {
+
+	public void printReplaceJs(String msg, String url) {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsReplace(msg, url));
 	}
 
 	public void printHistoryBackJs(String msg) {
-        resp.setContentType("text/html; charset=UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsHistoryBack(msg));
-	}
-	public boolean isNotLogined() {
-		return !isLogined;
 	}
 
 	public void print(String str) {
@@ -69,6 +66,10 @@ public class Rq {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isNotLogined() {
+		return !isLogined;
 	}
 
 	public void println(String str) {
@@ -83,15 +84,15 @@ public class Rq {
 		session.removeAttribute("loginedMemberId");
 	}
 
-    public String historyBackJsOnView(String msg) {
-        req.setAttribute("msg", msg);
-        req.setAttribute("historyBack", true);
-        return "common/js";
-    }
+	public String historyBackJsOnView(String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+		return "common/js";
+	}
 
-    public String jsHistoryBack(String msg) {
-        return Ut.jsHistoryBack(msg);
-    }
+	public String jsHistoryBack(String msg) {
+		return Ut.jsHistoryBack(msg);
+	}
 
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
@@ -112,5 +113,11 @@ public class Rq {
 		return Ut.getUriEncoded(getCurrentUri());
 	}
 
+	public String getLoginUri() {
+		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+	}
 
-} 
+	public String getAfterLoginUri() {
+		return getEncodedCurrentUri();
+	}
+}

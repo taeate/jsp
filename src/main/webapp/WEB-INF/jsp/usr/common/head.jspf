@@ -42,14 +42,14 @@
                 <span>자유게시판</span>
             </a>
             </li>
-            <c:if test="${!rq.isLogined()}">
+            <c:if test="${!rq.logined}">
             <li>
-                <a href="/usr/member/login" class="flex items-center h-full px-3 hover:underline hover:text-lg">
+                <a href="${rq.loginUri}" class="flex items-center h-full px-3 hover:underline hover:text-lg">
                 <span>로그인</span>
             </a>
             </li>
             </c:if>
-            <c:if test="${rq.isLogined()}">
+            <c:if test="${rq.logined}">
             <li>
                 <a href="/usr/member/myPage" class="flex items-center h-full px-3 hover:underline hover:text-lg">
                 <span>${rq.loginedMember.nickname} Profile</span>
