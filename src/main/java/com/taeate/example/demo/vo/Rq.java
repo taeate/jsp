@@ -48,7 +48,7 @@ public class Rq {
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
 
-		this.req.setAttribute("rq", this);
+	
 	}
 
 	public void printHistoryBackJs(String msg) {
@@ -107,8 +107,4 @@ public class Rq {
 	public String getEncodedCurrentUri() {
 		return Ut.getUriEncoded(getCurrentUri());
 	}
-
-    public void initOnBeforeActionInterceptor() {
-		
-    }
-}
+} 
