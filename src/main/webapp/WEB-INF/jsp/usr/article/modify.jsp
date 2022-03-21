@@ -3,23 +3,25 @@
 
 <c:set var="pageTitle" value="게시물 수정" />
 <%@ include file="../common/head.jspf"%>
+<%@ include file="../../common/toastUiEditorLib.jspf"%>
 
 <script>
   let ArticleModify__submitDone = false;
   function ArticleModify__submit(form) {
-
     if ( ArticleModify__submitDone ) {
       return;
     }
-
-    form.body.value = form.body.value.trim();
-
-    if ( form.body.value.length == 0 ) {
-       alert('내용을 입력해주세요.')
-       form.body.focus();
-
-       return;
-    } 
+    
+    const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
+    const markdown = editor.getMarkdown().trim();
+    if (markdown.length == 0) {
+      alert('내용을 입력해주세요.');
+      editor.focus();
+      return;
+    }
+    form.body.value = markdown;
+    
+    ArticleModify__submitDone = true;
     form.submit();
   }
 </script>
@@ -28,6 +30,7 @@
   <div class="container mx-auto px-3">
     <form class="table-box-type-1" method="POST" action="../article/doModify" onsubmit="ArticleModify__submit(this); return false;">
       <input type="hidden" name="id" value="${article.id}" />
+      <input type="hidden" name="body">
       <table>
         <colgroup>
           <col width="200" />
@@ -36,7 +39,7 @@
           <tr>
             <th>번호</th>
             <td>
-              <div class="badge badge-md">${article.id}</div>
+              <div class="badge badge-primary">${article.id}</div>
             </td>
           </tr>
           <tr>
@@ -54,8 +57,7 @@
           <tr>
             <th>작성자</th>
             <td>
-              <div class="badge">${article.extra__writerName}</div>
-
+              ${article.extra__writerName}
             </td>
           </tr>
           <tr>
@@ -67,7 +69,7 @@
           <tr>
             <th>추천</th>
             <td>
-              <span class="badge badge-primary">${article.extra__goodReactionPoint}</span>
+              <span class="badge badge-primary">${article.goodReactionPoint}</span>
             </td>
           </tr>
           <tr>
@@ -79,24 +81,28 @@
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="w-full textarea textarea-bordered " name="body" rows="10" placeholder="내용을 입력해주세요.">${article.body}</textarea>
+              <div class="toast-ui-editor">
+                <script type="text/x-template">
+${article.body}
+				</script>
+              </div>
             </td>
           </tr>
           <tr>
             <th>수정</th>
             <td>
-              <button type="submit" class="btn btn-outline btn-primary">수정</button>
-              <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
+              <button type="submit" class="btn btn-primary">수정</button>
+              <button type="button" class="btn btn-secondary btn-outline" onclick="history.back();">뒤로가기</button>
             </td>
           </tr>
         </tbody>
       </table>
     </form>
-
+    
     <div class="btns">
       <a class="btn btn-link" href="../article/detail?id=${article.id}">게시물 상세페이지</a>
       <c:if test="${article.extra__actorCanModify}">
-      <a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
+        <a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
       </c:if>
       <c:if test="${article.extra__actorCanDelete}">
         <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="../article/doDelete?id=${article.id}">게시물 삭제</a>
