@@ -132,11 +132,12 @@ ${article.body}
     <div class="btns">
       <c:if test="${empty param.listUri}">
         <button class="btn btn-link" type="button"
-        onclick="history.back();">뒤로가기</button>
+          onclick="history.back();">뒤로가기</button>
       </c:if>
       <c:if test="${not empty param.listUri}">
         <a class="btn btn-link" href="${param.listUri}">뒤로가기</a>
       </c:if>
+      
       <c:if test="${article.extra__actorCanModify}">
         <a class="btn btn-link"
           href="../article/modify?id=${article.id}">게시물 수정</a>
@@ -182,6 +183,7 @@ ${article.body}
       <form class="table-box-type-1" method="POST"
         action="../reply/doWrite"
         onsubmit="ReplyWrite__submitForm(this); return false;">
+        <input type="hidden" name="replaceUri" value="${rq.currentUri}" />
         <input type="hidden" name="relTypeCode" value="article" />
         <input type="hidden" name="relId" value="${article.id}" />
         <table>
@@ -252,15 +254,15 @@ ${article.body}
             <td>
               <c:if test="${reply.extra__actorCanModify}">
                 <a class="btn btn-link"
-                  href="../reply/modify?id=${reply.id}">수정</a>
+                  href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
               </c:if>
               <c:if test="${reply.extra__actorCanDelete}">
                 <a class="btn btn-link"
                   onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
-                  href="../reply/doDelete?id=${reply.id}">삭제</a>
+                  href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a>
               </c:if>
             </td>
-            <td>${reply.forPrintBody}</td>
+            <td>${reply.body}</td>
           </tr>
         </c:forEach>
       </tbody>

@@ -128,30 +128,33 @@ public class UsrArticleController {
 			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 
-		articleService.ModifyArticle(id, title, body);
+		articleService.modifyArticle(id, title, body);
 
 		return rq.jsReplace(Ut.f("%d번 글이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
 	}
 
     // 액션메서드 끝
     @RequestMapping("/usr/article/list")
-	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId, @RequestParam(defaultValue = "1") int page,@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,@RequestParam(defaultValue = "") String searchKeyword) {
+	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		Board board = boardService.getBoardById(boardId);
-		
-		if ( board == null ) {
+
+		if (board == null) {
 			return rq.historyBackJsOnView(Ut.f("%d번 게시판은 존재하지 않습니다.", boardId));
 		}
 
-		int articlesCount = articleService.getArticlesCount(boardId,searchKeyword,searchKeywordTypeCode);
-        
-        int itemsCountInAPage = 10;
-        int pagesCount = (int)Math.ceil((double)articlesCount / itemsCountInAPage);
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId, searchKeyword,searchKeywordTypeCode, itemsCountInAPage, page);
+		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 
-        model.addAttribute("boardId", boardId);
-        model.addAttribute("page", page);
+		int itemsCountInAPage = 10;
+		int pagesCount = (int) Math.ceil((double) articlesCount / itemsCountInAPage);
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId,
+				searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
+
+		model.addAttribute("boardId", boardId);
+		model.addAttribute("page", page);
 		model.addAttribute("board", board);
-        model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("articles", articles);
 
@@ -197,10 +200,11 @@ public class UsrArticleController {
 			return increaseHitCountRd;
 		}
 
-		ResultData rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
-		
+		ResultData rd = ResultData.newData(increaseHitCountRd, "hitCount",
+				articleService.getArticleHitCount(id));
+
 		rd.setData2("id", id);
-		
+
 		return rd;
 	}
 

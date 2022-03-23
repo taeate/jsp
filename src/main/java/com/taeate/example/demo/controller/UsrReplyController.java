@@ -78,7 +78,7 @@ public class UsrReplyController {
 		}
 
 		ResultData writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
-		int id = (int) writeReplyRd.getData1();
+		int id = (int)writeReplyRd.getData1();
 
 		if (Ut.empty(replaceUri)) {
 			switch (relTypeCode) {

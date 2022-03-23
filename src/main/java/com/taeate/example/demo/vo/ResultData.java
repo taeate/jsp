@@ -48,6 +48,6 @@ public class ResultData {
     public void setData2(String dataName, Object data) {
 		data2Name = dataName;
 		data2 = data;
-    }
+	}
 
 }

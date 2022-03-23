@@ -110,5 +110,4 @@ ${article.body}
     </div>
   </div>
 </section>
-
 <%@ include file="../common/foot.jspf"%>

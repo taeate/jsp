@@ -48,6 +48,11 @@
                 <span>로그인</span>
             </a>
             </li>
+            <li>
+                <a href="${rq.joinUri}" class="flex items-center h-full px-3 hover:underline hover:text-lg">
+                <span>회원가입</span>
+            </a>
+            </li>
             </c:if>
             <c:if test="${rq.logined}">
             <li>
