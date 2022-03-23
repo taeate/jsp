@@ -47,6 +47,7 @@
             </thead>
             <tbody>
               <c:forEach var="article" items="${articles}">
+                
                 <tr>
                   <th>${article.id}</th>
                   <td>${article.forPrintType1RegDate}</td>
@@ -55,7 +56,7 @@
                   <td>${article.goodReactionPoint}</td>
                   <td>${article.extra__writerName}</td>
                   <td>
-                    <a class="btn-text-link w-full block truncate" href="../article/detail?id=${article.id}">
+                    <a class="btn-text-link w-full block truncate" href="${rq.getArticleDetailUriFromArticleList(article)}">
                       ${article.title}
                   </td>
                 </tr>
