@@ -76,4 +76,8 @@ public class MemberService {
         return ResultData.from("S-1", "정상적인 코드입니다.");
     }
 
+    public Member getMemberByNameAndEmail(String name, String email) {
+        return memberRepository.getMemberByNameandemail(name, email);
+    }
+
 }
