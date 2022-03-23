@@ -1,6 +1,6 @@
-server:
-  port: 8011
 spring:
+  profiles:
+    active: local # 기본적으로 lacal이 선택된다는 뜻
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -14,4 +14,30 @@ spring:
 mybatis:
   type-aliases-package: com.taeate.example.demo.vo
 
+---
 
+spring:
+  config:
+      activate:
+            on-profile: local
+server:
+  port: 8011
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: production
+  servlet:
+    multipart:
+      location: /tmp
+  datasource:
+    username: sbsstlocal
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.17.0.1:3306/sb_c_2021_2nd_t_production?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+custom:
+  logging:
+    dir: /tmp/sb_c_2021_2nd_t-log
+    level: info
