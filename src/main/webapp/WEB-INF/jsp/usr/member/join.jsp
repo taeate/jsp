@@ -3,6 +3,7 @@
 
 <c:set var="pageTitle" value="회원가입" />
 <%@ include file="../common/head.jspf" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
    <section>
       <div class="container mx-auto px-3 mt-5">
 
@@ -97,6 +98,8 @@
                 }
               }, 'json');
           }
+
+          const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 300);
         </script>
         
 
@@ -110,7 +113,7 @@
                 <tr>
                   <th>로그인아이디</th>
                   <td>
-                   <input onkeyup="checkLoginIdDup(this);" name="loginId" type="text" placeholder="로그인아이디" class="input input-bordered input-primary w-full max-w-xs">
+                   <input onkeyup="checkLoginIdDupDebounced(this);" name="loginId" type="text" placeholder="로그인아이디" class="input input-bordered input-primary w-full max-w-xs">
                    <div class="loginId-message"></div>
                   </td>
                   <tr></tr>
