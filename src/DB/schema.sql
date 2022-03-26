@@ -29,7 +29,7 @@ title = '제목3',
 `body` = '내용3';
 
 
-CREATE TABLE MEMBER (
+CREATE TABLE member (
 	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regdate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE MEMBER (
 );
 
 # 회원 테스트 관리자회원 생성
-INSERT INTO MEMBER
+INSERT INTO member
 SET regdate = NOW(),
 updateDate = NOW(),
 loginId = 'admin',
@@ -58,7 +58,7 @@ email = 'yes3144@nate.com'
 
 
 # 회원 테스트 일반회원 생성
-INSERT INTO MEMBER
+INSERT INTO member
 SET regdate = NOW(),
 updateDate = NOW(),
 loginId = 'user1',
@@ -70,7 +70,7 @@ email = 'jjh3956@naver.com'
 
 
 # 회원 테스트 일반회원2 생성
-INSERT INTO MEMBER
+INSERT INTO member
 SET regdate = NOW(),
 updateDate = NOW(),
 loginId = 'user2',
@@ -101,7 +101,7 @@ CREATE TABLE board (
 );
 
 # 기본 게시판 생성
-INSERT INTO Board
+INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code`= 'notice',
@@ -109,7 +109,7 @@ updateDate = NOW(),
 
 
 # 자유 게시판 생성
-INSERT INTO Board
+INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code`= 'free1',

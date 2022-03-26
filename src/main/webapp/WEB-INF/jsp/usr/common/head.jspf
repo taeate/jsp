@@ -12,61 +12,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.6.3/dist/full.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/resource/common.css">
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
     <script src="/resource/common.js" defer="defer"></script>
+    <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
 </head>
 <body>
     <header>
-        <div class="flex bg-red-500 container mx-auto h-20">
-        <a href="/" class="flex items-center px-3">
-            <span>로고</span>
-        </a>
-        <div class="flex-grow"></div>
-        <ul class="flex">
-            <li>
-                <a href="/" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>홈</span>
-            </a>
-            </li>
-             <li>
-                <a href="/usr/article/write" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>글쓰기</span>
-            </a>
-            </li>
-            <li>
-                <a href="/usr/article/list?boardId=1" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>공지사항</span>
-            </a>
-            </li>
-            <li>
-                <a href="/usr/article/list?boardId=2" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>자유게시판</span>
-            </a>
-            </li>
-            <c:if test="${!rq.logined}">
-            <li>
-                <a href="${rq.loginUri}" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>로그인</span>
-            </a>
-            </li>
-            <li>
-                <a href="${rq.joinUri}" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>회원가입</span>
-            </a>
-            </li>
-            </c:if>
-            <c:if test="${rq.logined}">
-            <li>
-                <a href="/usr/member/myPage" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>${rq.loginedMember.nickname} Profile</span>
-            </a>
-            </li>
-            <li>
-                <a href="${rq.logoutUri}" class="flex items-center h-full px-3 hover:underline hover:text-lg">
-                <span>로그아웃</span>
-            </a>
-            </li>
-            </c:if>
-        </ul>
+        <div class="navbar bg-gray-700 flex container mx-auto h-20">
+            <div class="flex-1">
+                <a class="btn btn-ghost normal-case text-xl text-white" href="/">Cozzy</a>
+            </div>
+                <div class="flex-none">
+                    <ul class="menu menu-horizontal p-0 text-white">
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/usr/article/write">글쓰기</a></li>
+                    <li><a href="/usr/article/list?boardId=1">공지사항</a></li>
+                    <li><a href="/usr/article/list?boardId=2">자유게시판</a></li>
+                    <c:if test="${!rq.logined}">
+                    <li><a href="${rq.loginUri}">로그인</a></li>
+                    <li><a href="${rq.joinUri}">회원가입</a></li>
+                    </c:if>
+                    <c:if test="${rq.logined}">
+                    <li>
+                        <a href="/usr/member/myPage">${rq.loginedMember.nickname} Profile</a>
+                    </li>
+                    <li>
+                        <a href="${rq.logoutUri}">로그아웃</a>
+                    </li>
+                    </c:if>
+                    </ul>
+                </div>
         </div>
     </header>
     <section>
