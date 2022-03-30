@@ -4,38 +4,35 @@
 <c:set var="pageTitle" value="로그인" />
 <%@ include file="../common/head.jspf" %>
    <section>
-      <div class="container mx-auto px-3 mt-5">
-        <form class="table-box-type-1" method="post" action="../member/doLogin">
-          <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" >
-          <table border="1">
-            <colgroup>
-              <col width="200">
-             </colgroup>
-            <tbody>
-                <tr>
-                  <th>로그인아이디</th>
-                  <td>
-                   <input name="loginId" type="text" placeholder="로그인아이디" class="input input-bordered input-primary w-full max-w-xs">
-                  </td>
-                  <tr></tr>
-
-                  <th>로그인비밀번호</th>
-                  <td>
-                    <input name="loginPw" type="password" placeholder="로그인비밀번호" class="input input-bordered input-primary w-full max-w-xs">
-                  </td>
-                  <tr></tr>
-
-                  <th>로그인</th>
-                  <td>
-                 
-                    <button type="submit"  class="btn btn-outline btn-primary">로그인</button>
-                    <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
-                  </td>
-                  <tr></tr>
-                </tr>
-            </tbody>
-          </table>
-        </form>
+    <div class="hero min-h-screen bg-indigo-900">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <h1 class="text-5xl font-bold text-white">Login now!</h1>
+      <p class="py-6 text-white">Cozzy is a site that solves site errors that communicate with developers. Please log in.</p>
     </div>
+    <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="card-body">
+        <form class="table-box-type-1" method="post" action="../member/doLogin">
+          <div class="form-control">
+                <label class="label">
+                  <span class="label-text">ID</span>
+                </label>
+                
+                <input name="loginId" type="text" placeholder="id" class="input input-bordered">
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Password</span>
+                </label>
+                <input name="loginPw" type="text" placeholder="password" class="input input-bordered">
+              </div>
+              <div class="form-control mt-6">
+                <button type="submit" class="btn btn-primary bg-blue-600">Login</button>     
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
   </section>
   <%@ include file="../common/foot.jspf" %>
