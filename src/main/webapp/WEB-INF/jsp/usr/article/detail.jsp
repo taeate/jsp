@@ -30,93 +30,91 @@
             setTimeout(ArticleDetail__increaseHitCount, 500);
           })
         </script>
-        <section class="mt-5">
+        <section class="mt-5 mx-auto">
           <div class="container mx-auto px-3">
-            <div class="table-box-type-1">
-              <table>
-                <colgroup>
-                  <col width="200" />
-                </colgroup>
-                <tbody>
-                  <tr>
-                    <th>번호</th>
-                    <td>
-                      <div class="badge badge-primary">${article.id}</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>작성날짜</th>
-                    <td>${article.forPrintType2RegDate}</td>
-                  </tr>
-                  <tr>
-                    <th>수정날짜</th>
-                    <td>${article.forPrintType2UpdateDate}</td>
-                  </tr>
-                  <tr>
-                    <th>작성자</th>
-                    <td>${article.extra__writerName}</td>
-                  </tr>
-                  <tr>
-                    <th>조회</th>
-                    <td>
-                      <span class="badge badge-primary article-detail__hit-count">${article.hitCount}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>추천</th>
-                    <td>
-                      <div class="flex items-center">
-                        <span class="badge badge-primary">${article.goodReactionPoint}</span>
+            <table>
+              <colgroup>
+                <col width="200" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th>번호</th>
+                  <td>
+                    <div class="badge badge-primary">${article.id}</div>
+                  </td>
+                </tr>
+                <tr>
+                  <th>작성날짜</th>
+                  <td>${article.forPrintType2RegDate}</td>
+                </tr>
+                <tr>
+                  <th>수정날짜</th>
+                  <td>${article.forPrintType2UpdateDate}</td>
+                </tr>
+                <tr>
+                  <th>작성자</th>
+                  <td>${article.extra__writerName}</td>
+                </tr>
+                <tr>
+                  <th>조회</th>
+                  <td>
+                    <span class="badge badge-primary article-detail__hit-count">${article.hitCount}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th>추천</th>
+                  <td>
+                    <div class="flex items-center">
+                      <span class="badge badge-primary">${article.goodReactionPoint}</span>
+                      <span>&nbsp;</span>
+
+                      <c:if test="${actorCanMakeReaction}">
+                        <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                          class="btn btn-xs btn-primary btn-outline"> 좋아요
+                          👍 </a>
                         <span>&nbsp;</span>
+                        <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                          class="btn btn-xs btn-secondary btn-outline">
+                          싫어요 👎 </a>
+                      </c:if>
 
-                        <c:if test="${actorCanMakeReaction}">
-                          <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                            class="btn btn-xs btn-primary btn-outline"> 좋아요
-                            👍 </a>
-                          <span>&nbsp;</span>
-                          <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                            class="btn btn-xs btn-secondary btn-outline">
-                            싫어요 👎 </a>
-                        </c:if>
+                      <c:if test="${actorCanCancelGoodReaction}">
+                        <a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                          class="btn btn-xs btn-primary"> 좋아요 👍 </a>
+                        <span>&nbsp;</span>
+                        <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#"
+                          class="btn btn-xs btn-secondary btn-outline">
+                          싫어요 👎 </a>
+                      </c:if>
 
-                        <c:if test="${actorCanCancelGoodReaction}">
-                          <a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                            class="btn btn-xs btn-primary"> 좋아요 👍 </a>
-                          <span>&nbsp;</span>
-                          <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#"
-                            class="btn btn-xs btn-secondary btn-outline">
-                            싫어요 👎 </a>
-                        </c:if>
+                      <c:if test="${actorCanCancelBadReaction}">
+                        <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#"
+                          class="btn btn-xs btn-primary btn-outline"> 좋아요
+                          👍 </a>
+                        <span>&nbsp;</span>
+                        <a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                          class="btn btn-xs btn-secondary"> 싫어요 👎 </a>
+                      </c:if>
 
-                        <c:if test="${actorCanCancelBadReaction}">
-                          <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#"
-                            class="btn btn-xs btn-primary btn-outline"> 좋아요
-                            👍 </a>
-                          <span>&nbsp;</span>
-                          <a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                            class="btn btn-xs btn-secondary"> 싫어요 👎 </a>
-                        </c:if>
-
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>제목</th>
-                    <td>${article.title}</td>
-                  </tr>
-                  <tr>
-                    <th>내용</th>
-                    <td>
-                      <div class="toast-ui-viewer">
-                        <script type="text/x-template">
-                ${article.body}
-        				</script>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th>제목</th>
+                  <td>${article.title}</td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td>
+                    <div class="toast-ui-viewer">
+                      <script type="text/x-template">
+              ${article.body}
+              </script>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             <div class="btns">
               <c:if test="${empty param.listUri}">
@@ -163,7 +161,6 @@
 
         <section class="mt-5">
           <div class="container mx-auto px-3">
-            <h1>댓글 작성</h1>
 
             <c:if test="${rq.logined}">
               <form class="table-box-type-1" method="POST" action="../reply/doWrite"
@@ -175,25 +172,15 @@
                   <colgroup>
                     <col width="200" />
                   </colgroup>
-                  <tbody>
-                    <tr>
-                      <th>작성자</th>
-                      <td>${rq.loginedMember.nickname}</td>
-                    </tr>
-                    <tr>
-                      <th>내용</th>
-                      <td>
-                        <textarea class="w-full textarea textarea-bordered" name="body" rows="5"
-                          placeholder="내용"></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>댓글작성</th>
-                      <td>
-                        <button type="submit" class="btn btn-primary bg-blue-500">댓글작성</button>
-                      </td>
-                    </tr>
-                  </tbody>
+
+
+                  <label for="message"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">${rq.loginedMember.nickname}</label>
+                  <textarea id="message" rows="4" name="body"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="댓글을 작성해주세요."></textarea>
+                  <button type="submit" class="btn btn-primary bg-blue-500 mt-2">댓글작성</button>
+
                 </table>
               </form>
             </c:if>
@@ -205,52 +192,41 @@
 
         <section class="mt-5">
           <div class="container mx-auto px-3">
-            <h1>댓글 리스트(${replies.size()})</h1>
+            <h1>댓글 (${replies.size()})</h1>
 
-            <table class="table table-fixed w-full">
-              <colgroup>
-                <col width="50" />
-                <col width="100" />
-                <col width="100" />
-                <col width="50" />
-                <col width="100" />
-                <col width="150" />
-                <col />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>번호</th>
-                  <th>작성날짜</th>
-                  <th>수정날짜</th>
-                  <th>추천</th>
-                  <th>작성자</th>
-                  <th>비고</th>
-                  <th>내용</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:forEach var="reply" items="${replies}">
-                  <tr class="align-top">
-                    <th>${reply.id}</th>
-                    <td>${reply.forPrintType1RegDate}</td>
-                    <td>${reply.forPrintType1UpdateDate}</td>
-                    <td>${reply.goodReactionPoint}</td>
-                    <td>${reply.extra__writerName}</td>
-                    <td>
-                      <c:if test="${reply.extra__actorCanModify}">
-                        <a class="btn btn-link"
-                          href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
-                      </c:if>
-                      <c:if test="${reply.extra__actorCanDelete}">
-                        <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
-                          href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a>
-                      </c:if>
-                    </td>
-                    <td>${reply.body}</td>
-                  </tr>
-                </c:forEach>
-              </tbody>
-            </table>
+
+            <ol class="relative border-l border-gray-200 dark:border-gray-700 mt-2">
+              <c:forEach var="reply" items="${replies}">
+                <li class="mb-10 ml-6">
+                  <span
+                    class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                  </span>
+                  <div
+                    class="justify-between items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
+                    <time
+                      class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">${reply.forPrintType1RegDate}</time>
+                    <div class="text-sm font-normal text-gray-500 dark:text-gray-300">${reply.body} <a href="#"
+                        class="font-semibold text-blue-600 dark:text-blue-500 hover:underline">${reply.extra__writerName}</a>
+                      <span></span>
+                    </div>
+
+                  </div>
+                  <c:if test="${reply.extra__actorCanModify}">
+                    <a class="btn btn-link"
+                      href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
+                  </c:if>
+                  <c:if test="${reply.extra__actorCanDelete}">
+                    <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
+                      href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a>
+                  </c:if>
+                </li>
+
+              </c:forEach>
+            </ol>
+
+
+
           </div>
+
         </section>
         <%@ include file="../common/foot.jspf" %>
