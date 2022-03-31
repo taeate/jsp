@@ -28,7 +28,7 @@
                   <th>로그인</th>
                   <td>
                  
-                    <button type="submit"  class="btn btn-outline btn-primary">비밀번호확인</button>
+                    <button type="submit"  class="btn btn-outline btn-primary bg-blue-500">비밀번호확인</button>
                     <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
                   </td>
                   <tr></tr>

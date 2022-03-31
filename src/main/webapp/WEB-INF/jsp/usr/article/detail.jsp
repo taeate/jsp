@@ -47,33 +47,33 @@
                     ${article.goodReactionPoint}
                   </div>
                 </div>
-                <div class="ml-4">
-                  <button>
-                    <div class="dropdown dropdown-left">
-                      <i class="fa-solid fa-ellipsis-vertical fa-1x" tabindex="0"></i>
-                      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>
-                          <c:if test="${article.extra__actorCanModify}">
+                <c:if test="${article.extra__actorCanModify}">
+                  <div class="ml-4">
+                    <button>
+                      <div class="dropdown dropdown-left">
+                        <i class="fa-solid fa-ellipsis-vertical fa-1x" tabindex="0"></i>
+                        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                          <li>
                             <a href="../article/modify?id=${article.id}">게시물 수정</a>
-                          </c:if>
-                        </li>
-                        <li>
-                          <c:if test="${article.extra__actorCanDelete}">
-                            <a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
-                              href="../article/doDelete?id=${article.id}">게시물 삭제</a>
-                          </c:if>
-                        </li>
-                      </ul>
-                    </div>
-                  </button>
-                </div>
+                          </li>
+                          <li>
+                            <c:if test="${article.extra__actorCanDelete}">
+                              <a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
+                                href="../article/doDelete?id=${article.id}">게시물 삭제</a>
+                            </c:if>
+                          </li>
+                        </ul>
+                      </div>
+                    </button>
+                  </div>
+                </c:if>
               </div>
               <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
                 <a href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
 
 
                   <div class="text-gray-600 dark:text-gray-400">
-                    <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white">
+                    <div class="text-lg font-normal"><span class="text-lg text-gray-900 dark:text-white">
                         <div class="toast-ui-viewer">
                           <script type="text/x-template">
                         ${article.body}
@@ -214,6 +214,7 @@
 
               </c:forEach>
             </ol>
+
 
 
 

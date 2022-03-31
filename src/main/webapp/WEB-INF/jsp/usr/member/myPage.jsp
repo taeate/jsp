@@ -45,7 +45,7 @@
 
                   <th>비고</th>
                   <td>
-                    <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-primary">회원정보수정</a>
+                    <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-primary bg-blue-500">회원정보수정</a>
                     <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
                   </td>
                   <tr></tr>

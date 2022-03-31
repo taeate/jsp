@@ -29,16 +29,21 @@
                         </a>
                         <div class="flex md:order-2">
                             <c:if test="${!rq.logined}">
-                                <a href="${rq.loginUri}"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">로그인</a>
-                                <a href="${rq.joinUri}"
-                                    class="ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">회원가입</a>
+                                <a class="text-white text-sm hover:text-blue-500" href="${rq.loginUri}">로그인</a>
+                                <a class="text-white ml-6 text-sm hover:text-blue-500" href="${rq.joinUri}">회원가입</a>
                             </c:if>
                             <c:if test="${rq.logined}">
-                                <a type="button"
-                                    class="ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">profile</a>
-                                <a href="${rq.logoutUri}" type="button"
-                                    class="ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
+                                <a type="button" href="/usr/member/myPage">
+                                    <div>
+                                        <span class="text-white text-sm hover:text-blue-500">Profile</span>
+                                    </div>
+                                </a>
+                                <a href="${rq.logoutUri}">
+                                    <div class="ml-6">
+                                        <i class="fa-solid fa-right-from-bracket fa-lg text-white "></i>
+                                        <span class="text-sm text-white ml-1 hover:text-blue-500">로그아웃</span>
+                                    </div>
+                                </a>
                             </c:if>
                             <button data-collapse-toggle="mobile-menu-4" type="button"
                                 class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

@@ -91,7 +91,7 @@ ${article.body}
           <tr>
             <th>수정</th>
             <td>
-              <button type="submit" class="btn btn-primary">수정</button>
+              <button type="submit" class="btn btn-primary bg-blue-700">수정</button>
               <button type="button" class="btn btn-secondary btn-outline" onclick="history.back();">뒤로가기</button>
             </td>
           </tr>

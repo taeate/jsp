@@ -128,7 +128,7 @@
           <tr>
             <th>회원정보수정</th>
             <td>
-              <button type="submit" class="btn btn-primary">회원정보수정</button>
+              <button type="submit" class="btn btn-primary bg-blue-500">회원정보수정</button>
               <button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
             </td>
           </tr>
