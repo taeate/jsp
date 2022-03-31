@@ -32,89 +32,87 @@
         </script>
         <section class="mt-5 mx-auto">
           <div class="container mx-auto px-3">
-            <table>
-              <colgroup>
-                <col width="200" />
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th>번호</th>
-                  <td>
-                    <div class="badge badge-primary">${article.id}</div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>작성날짜</th>
-                  <td>${article.forPrintType2RegDate}</td>
-                </tr>
-                <tr>
-                  <th>수정날짜</th>
-                  <td>${article.forPrintType2UpdateDate}</td>
-                </tr>
-                <tr>
-                  <th>작성자</th>
-                  <td>${article.extra__writerName}</td>
-                </tr>
-                <tr>
-                  <th>조회</th>
-                  <td>
-                    <span class="badge badge-primary article-detail__hit-count">${article.hitCount}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th>추천</th>
-                  <td>
-                    <div class="flex items-center">
-                      <span class="badge badge-primary">${article.goodReactionPoint}</span>
-                      <span>&nbsp;</span>
 
-                      <c:if test="${actorCanMakeReaction}">
-                        <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                          class="btn btn-xs btn-primary btn-outline"> 좋아요
-                          👍 </a>
-                        <span>&nbsp;</span>
-                        <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                          class="btn btn-xs btn-secondary btn-outline">
-                          싫어요 👎 </a>
-                      </c:if>
-
-                      <c:if test="${actorCanCancelGoodReaction}">
-                        <a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                          class="btn btn-xs btn-primary"> 좋아요 👍 </a>
-                        <span>&nbsp;</span>
-                        <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#"
-                          class="btn btn-xs btn-secondary btn-outline">
-                          싫어요 👎 </a>
-                      </c:if>
-
-                      <c:if test="${actorCanCancelBadReaction}">
-                        <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#"
-                          class="btn btn-xs btn-primary btn-outline"> 좋아요
-                          👍 </a>
-                        <span>&nbsp;</span>
-                        <a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-                          class="btn btn-xs btn-secondary"> 싫어요 👎 </a>
-                      </c:if>
-
+            <div class="p-5 mb-4 bg-gray-50 rounded-lg border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+              <div class="container flex justify-between">
+                <div class="flex text-center">
+                  <div class="text-lg font-semibold text-gray-900 dark:text-white">${article.title}</div>
+                  <div class="text-base m-auto text-blue-600 ml-4">${article.extra__writerName}</div>
+                  <div class="ml-2 m-auto text-sm text-gray-500">${article.forPrintType2RegDate}</div>
+                  <div class="ml-4 m-auto"><i class="fa-solid fa-eye"></i>
+                    <span>${article.hitCount}</span>
+                  </div>
+                  <div class="ml-6 m-auto">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    ${article.goodReactionPoint}
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <button>
+                    <div class="dropdown dropdown-left">
+                      <i class="fa-solid fa-ellipsis-vertical fa-1x" tabindex="0"></i>
+                      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>
+                          <c:if test="${article.extra__actorCanModify}">
+                            <a href="../article/modify?id=${article.id}">게시물 수정</a>
+                          </c:if>
+                        </li>
+                        <li>
+                          <c:if test="${article.extra__actorCanDelete}">
+                            <a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
+                              href="../article/doDelete?id=${article.id}">게시물 삭제</a>
+                          </c:if>
+                        </li>
+                      </ul>
                     </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>제목</th>
-                  <td>${article.title}</td>
-                </tr>
-                <tr>
-                  <th>내용</th>
-                  <td>
-                    <div class="toast-ui-viewer">
-                      <script type="text/x-template">
-              ${article.body}
-              </script>
+                  </button>
+                </div>
+              </div>
+              <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
+                <a href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
+
+
+                  <div class="text-gray-600 dark:text-gray-400">
+                    <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white">
+                        <div class="toast-ui-viewer">
+                          <script type="text/x-template">
+                        ${article.body}
+                        </script>
+                        </div>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </div>
+                </a>
+              </ol>
+              <div class="mt-4 flex justify-end">
+                <c:if test="${actorCanMakeReaction}">
+                  <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                    class="btn btn-xs btn-primary btn-outline"> 좋아요
+                    👍 </a>
+                  <span>&nbsp;</span>
+                  <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                    class="btn btn-xs btn-secondary btn-outline">
+                    싫어요 👎 </a>
+                </c:if>
+
+                <c:if test="${actorCanCancelGoodReaction}">
+                  <a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                    class="btn btn-xs btn-primary"> 좋아요 👍 </a>
+                  <span>&nbsp;</span>
+                  <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#"
+                    class="btn btn-xs btn-secondary btn-outline">
+                    싫어요 👎 </a>
+                </c:if>
+
+                <c:if test="${actorCanCancelBadReaction}">
+                  <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#"
+                    class="btn btn-xs btn-primary btn-outline"> 좋아요
+                    👍 </a>
+                  <span>&nbsp;</span>
+                  <a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                    class="btn btn-xs btn-secondary"> 싫어요 👎 </a>
+                </c:if>
+              </div>
+            </div>
 
             <div class="btns">
               <c:if test="${empty param.listUri}">
@@ -123,15 +121,8 @@
               <c:if test="${not empty param.listUri}">
                 <a class="btn btn-link" href="${param.listUri}">뒤로가기</a>
               </c:if>
-
-              <c:if test="${article.extra__actorCanModify}">
-                <a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
-              </c:if>
-              <c:if test="${article.extra__actorCanDelete}">
-                <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
-                  href="../article/doDelete?id=${article.id}">게시물 삭제</a>
-              </c:if>
             </div>
+            <hr class="mt-4">
           </div>
         </section>
 
@@ -175,7 +166,7 @@
 
 
                   <label for="message"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">${rq.loginedMember.nickname}</label>
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 mt-4">${rq.loginedMember.nickname}</label>
                   <textarea id="message" rows="4" name="body"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="댓글을 작성해주세요."></textarea>
