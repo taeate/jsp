@@ -69,7 +69,7 @@
                 </c:if>
               </div>
               <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
-                <a href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
+                <div class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
 
 
                   <div class="text-gray-600 dark:text-gray-400">
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                   </div>
-                </a>
+                </div>
               </ol>
               <div class="mt-4 flex justify-end">
                 <c:if test="${actorCanMakeReaction}">
